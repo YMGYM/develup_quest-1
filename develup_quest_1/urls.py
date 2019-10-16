@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from findpet import urls as findpet_url
+from firstpage import urls as firstpage_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', include(findpet_url)),
+    path('', include(firstpage_urls)),
 ]
