@@ -16,11 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from firstpage import urls as firstpage_urls
-from crawler import urls as crawler_urls
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(firstpage_urls)),
-    path('', include(crawler_urls))
+    
 ]
