@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import AngelFind
+# Register your mode
 
-# Register your models here.
+admin.site.register(AngelFind)
