@@ -16,10 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from firstpage import urls as firstpage_urls
+<<<<<<< HEAD
 from findpet import urls as findpet_urls
+=======
+>>>>>>> b224e24f62b42ef4dc66789458a129c351235de0
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(firstpage_urls)),
+<<<<<<< HEAD
     path('findpet', include(findpet_urls)),
+=======
+    
+>>>>>>> b224e24f62b42ef4dc66789458a129c351235de0
 ]
