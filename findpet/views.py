@@ -3,7 +3,8 @@ from .models import AngelFind
 from crawler.crawl import *
 import datetime
 from django.utils import timezone
-
+from lostpet.models import AngelLost
+from django.db.models import Q
 
 def crawler(dog_url, cat_url):
     
@@ -52,4 +53,44 @@ def list(request):
     pet_list = AngelFind.objects.order_by('-date')
     
 
-    return render(request, 'findpetpage.html',{'pet_list':pet_list})
+    
+    # ----------------여기서부터 검색 기능 -------------------
+    linked_pet = []
+    word_list = []
+    for query in pet_list:
+        
+        word = query.species.strip().split(' ')
+        word_list.append(word)
+        
+        word = query.where.strip().split(' ')
+        word_list.append(word)
+        
+        searched_list = searcher(word_list)
+    
+        uni_qs = searched_list[0]
+        
+        for qs in searched_list:
+            uni_qs = uni_qs | qs
+        
+        linked_pet.append(uni_qs)
+        word_list = []
+    
+    
+        
+    # ----------------여기까지 검색 기능---------------------
+
+    zipped_list = zip(pet_list, linked_pet)
+    return render(request, 'findpetpage.html',{'context':zipped_list})
+
+
+def searcher(word):
+    # 참고 https://jamanbbo.tistory.com/21
+    searched_list = []
+    
+    for col_key in word:
+        for keyword in col_key:
+            slist = AngelLost.objects.filter(Q(where__icontains=keyword)|Q(species__icontains=keyword)).distinct()
+
+            searched_list.append(slist)
+            
+    return searched_list

@@ -1,16 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <p>
-    
-    {% for item in pet_list %}
-        <p>{{ item.where }}</p>
-        <img src=" {{ item.thumb }} " />
-        <p> {{item.species }} </p>
-        <p> {{item.date }} </p>
-        <a href="{{ item.link }}">자세히 보기</a>
-    
+
+    {% for pet, linked in context %}
+        <p>발견장소 : {{ pet.where }}</p>
+        <img src=" {{ pet.thumb }} " />
+        <p> 종 :  {{pet.species }} </p>
+        <p> 신고일시 : {{pet.date }} </p>
+        <a href="{{ pet.link }}">자세히 보기</a>
+        <p>
+            관련된 펫 : 
+            <br/>
+            {% if linked.count == 0 %}
+                <p> 등록된 신고가 없어요 ㅠㅠ </p>
+            {% else %}
+                {% for l in linked %}
+                
+                <img src=" {{ l.thumb }} " />
+                
+                {% endfor %}
+            
+            {% endif %}
+            
+        </p>
+<br />
+<br />
     {% endfor %}
+
     
 </p>
 {% endblock content %}
