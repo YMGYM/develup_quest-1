@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <!-- Hi! I'm just testing -->
-
+<p>
+    
+    {% for item in pet_list %}
+        <p>{{ item.where }}</p>
+        <img src=" {{ item.thumb }} " />
+        <p> {{item.species }} </p>
+        <p> {{item.date }} </p>
+        <a href="{{ item.link }}">자세히 보기</a>
+    
+    {% endfor %}
+    
+</p>
 {% endblock content %}

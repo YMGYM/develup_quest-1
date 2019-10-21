@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from firstpage import urls as firstpage_urls
 from findpet import urls as findpet_urls
-
+from lostpet import urls as lostpet_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(firstpage_urls)),
-    path('findpet', include(findpet_urls)),
+    path('findpet/', include(findpet_urls)),
+    path('lostpet/', include(lostpet_urls)),
 ]
