@@ -3,8 +3,8 @@ from .models import AngelLost
 from crawler.crawl import *
 import datetime
 from django.utils import timezone
-
-
+from django.db.models import Q
+from findpet.models import AngelFind
 def crawler(dog_url, cat_url):
     
     # 강아지 실종정보
@@ -29,6 +29,7 @@ def crawler(dog_url, cat_url):
     
     return AngelLost.objects.all()
 
+
 def list(request):
     dog_crawling_url = "http://www.angel.or.kr/index.php?listType=&style=webzine&code=dog&ski=&sci=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84&sco=%EC%B2%9C%EC%95%88%EC%8B%9C+%EB%8F%99%EB%82%A8%EA%B5%AC&sgu=L"
     cat_crawling_url = "http://www.angel.or.kr/index.php?listType=&style=webzine&code=cat&ski=&sci=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84&sco=%EC%B2%9C%EC%95%88%EC%8B%9C+%EB%8F%99%EB%82%A8%EA%B5%AC&sgu=L"
@@ -51,5 +52,44 @@ def list(request):
     
     pet_list = AngelLost.objects.order_by('-date')
     
+    
+    # ----------------여기서부터 검색 기능 -------------------
+    linked_pet = []
+    word_list = []
+    for query in pet_list:
+        
+        word = query.species.strip().split(' ')
+        word_list.append(word)
+        
+        word = query.where.strip().split(' ')
+        word_list.append(word)
+        
+        searched_list = searcher(word_list)
+    
+        uni_qs = searched_list[0]
+        
+        for qs in searched_list:
+            uni_qs = uni_qs | qs
+        
+        linked_pet.append(uni_qs)
+        word_list = []
+    
+    
+        
+    # ----------------여기까지 검색 기능---------------------
 
-    return render(request, 'lostpetpage.html',{'pet_list':pet_list})
+    zipped_list = zip(pet_list, linked_pet)
+    return render(request, 'findpetpage.html',{'context':zipped_list})
+
+
+def searcher(word):
+    # 참고 https://jamanbbo.tistory.com/21
+    searched_list = []
+    
+    for col_key in word:
+        for keyword in col_key:
+            slist = AngelFind.objects.filter(Q(where__icontains=keyword)|Q(species__icontains=keyword)).distinct()
+
+            searched_list.append(slist)
+            
+    return searched_list

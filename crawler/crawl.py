@@ -6,7 +6,7 @@ import re
 
 
 def angel_crawler(angel_url):
-    # html = urlopen("http://www.angel.or.kr/index.php?listType=&style=webzine&code=dog&ski=&sci=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84&sco=%EC%B2%9C%EC%95%88%EC%8B%9C+%EB%8F%99%EB%82%A8%EA%B5%AC&sgu=L")
+
     html = urlopen(angel_url)
     bsObject = BeautifulSoup(html, "html.parser")
 
