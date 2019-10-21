@@ -7,7 +7,7 @@ from django.utils import timezone
 
 def crawler(dog_url, cat_url):
     
-    # 강아지 보호정보
+    # 강아지 실종정보
     lostPet = angel_crawler(dog_url)
     checkoutData = AngelLost.objects.filter(group='dog').last()
     if (checkoutData != None) and (lostPet[-1]['link'] == checkoutData.link):
@@ -17,7 +17,7 @@ def crawler(dog_url, cat_url):
             data = AngelLost(where = pet['where'], link = pet['link'], thumb=pet['thumb'], species = pet['species'], date = pet['date'], group='dog')
             data.save()
 
-    # 고양이 보호정보
+    # 고양이 실종정보
     lostPet = angel_crawler(cat_url)
     checkoutData = AngelLost.objects.filter(group='cat').last()
     if (checkoutData != None) and (lostPet[-1]['link'] == checkoutData.link):
