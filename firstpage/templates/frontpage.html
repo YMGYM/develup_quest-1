@@ -5,18 +5,12 @@
 <link rel="stylesheet" href="{% static 'firstpage/css/frontpage.css' %}" />
 
 <!-- img will be re-designed soon -->
-<!-- why doesn't text-decoration working? :( -->
-
-<!-- text-decoration 속성 해제 확인됨. 브라우저에서 적용되지 않으면. f12 - network - disable cache 후에 새로고침 바람 -->
-<!-- static 파일(css, script)등을 위한 static 폴더 생성했음. 자세한 내용은 https://www.tuwlab.com/ece/26424 참조 -->
-
 
 <h1><a href="#"><img src="{% static 'firstpage/images/logo.png' %}"/></a></h1>
-<!-- static 폴더 생성으로 인해 image 파일도 옮김. 정상작동 확인. -->
+
 <div class="wrapper">
   <div class="box1"><a href="#">lostpet</a></div>
   <div class="box2"><a href="{% url 'findpet:list' %}">findpet</a></div>
 </div>
 
 {% endblock content %}
-
