@@ -5,6 +5,8 @@ import datetime
 from django.utils import timezone
 from lostpet.models import AngelLost
 from django.db.models import Q
+from django.core.paginator import Paginator
+
 
 def crawler(dog_url, cat_url):
     
@@ -53,11 +55,22 @@ def list(request):
     pet_list = AngelFind.objects.order_by('-date')
     
 
+    # -----------------pagination-------------------------
+    
+    paginator = Paginator(pet_list, 7)
+    page = request.GET.get('page')
+    board = paginator.get_page(page)
+    
+    page_range = []
+    # templates 에서 쓰기 위한 페이지 레인지 저장
+    for r in range(board.paginator.num_pages):
+        page_range.append(int(r + 1))
+    
     
     # ----------------여기서부터 검색 기능 -------------------
     linked_pet = []
     word_list = []
-    for query in pet_list:
+    for query in board:
         
         word = query.species.strip().split(' ')
         word_list.append(word)
@@ -76,11 +89,11 @@ def list(request):
         word_list = []
     
     
-        
-    # ----------------여기까지 검색 기능---------------------
-
-    zipped_list = zip(pet_list, linked_pet)
-    return render(request, 'findpetpage.html',{'context':zipped_list})
+    # ---------------- 검색된 펫과, 페이지네이션 된 배열을 연결합니다.
+    zipped_list = zip(board, linked_pet)
+    
+    
+    return render(request, 'findpetpage.html',{'context':zipped_list, 'board':board, 'page_range': page_range })
 
 
 def searcher(word):

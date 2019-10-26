@@ -24,8 +24,8 @@
     {% for pet, linked in context %}
         <tbody>
           <tr>
-            <!-- 게시글을 넘버링 해주고 싶은데 구현해줄 수 있을까? -->
-            <td>1</td>
+            
+            <td>{{ pet.id }}</td>
             <td><img src= " {{ pet.thumb }} " width=150 height=150></td>
             <td>{{ pet.where }}</td>
             <td>{{pet.species }}</td>
@@ -49,17 +49,31 @@
      {% endfor %}
 </table>
 
-<!-- Pagination 기능 넣어줄 수 있을까?? 참조 : https://blog.naver.com/kimfame/221318967452 -->
+<!-- Pagination 참조 : https://blog.naver.com/kimfame/221318967452 -->
+<!-- 페이지가 없는 경우 disabled된 페이지 커서를 띄울 수 있게 주석처리 해 놓았음. 필요하면 해제 후 사용 -->
 <center>
     <ul class="pagination">
-       <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-       <li class="active grey"><a href="#!">1</a></li>
-       <li class="waves-effect"><a href="#!">2</a></li>
-       <li class="waves-effect"><a href="#!">3</a></li>
-       <li class="waves-effect"><a href="#!">4</a></li>
-       <li class="waves-effect"><a href="#!">5</a></li>
-      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    {% if board.has_previous %} 
+        <li class="waves-effect"><a href="?page={{ board.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+    {% else %}
+        <!-- <li class="disabled"><i class="material-icons">chevron_left</i></li> -->
+    {% endif %}
+        
+    {% for bn in page_range %}
+        {% if bn == board.number %}
+            <li class="active grey"><a href="?page={{ bn }}">{{bn}}</a></li>
+        
+        {% else %}
+            <li class="waves-effect"><a href="?page={{bn}}">{{bn}}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if board.has_next %} 
+        <li class="waves-effect"><a href="?page={{ board.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+    {% else %}
+        <!-- <li class="disabled"><i class="material-icons">chevron_right</i></li> -->
+    {% endif %}
     </ul>
 </center>
+    
 
 {% endblock content %}
