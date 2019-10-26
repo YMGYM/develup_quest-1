@@ -1,35 +1,65 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block content %}
 
-    <!-- Hi! I'm just testing -->
-<p>
+<link rel="stylesheet" href="{% static 'findpet/css/findpet.css' %}" />
+
+<!-- img will be re-designed soon -->
+
+<h1><a href="#"><img src="{% static 'findpet/images/logo.png' %}"/></a></h1>
+
+<table>
+        <thead>
+          <tr>
+              <th>No</th>
+              <th>사진</th>
+              <th>발견 장소</th>
+              <th>종</th>
+              <th>신고 일시</th>
+              <th>자세히 보기</th>
+              <th>관련된 펫</th>
+          </tr>
+        </thead>
 
     {% for pet, linked in context %}
-        <p>발견장소 : {{ pet.where }}</p>
-        <img src=" {{ pet.thumb }} " />
-        <p> 종 :  {{pet.species }} </p>
-        <p> 신고일시 : {{pet.date }} </p>
-        <a href="{{ pet.link }}">자세히 보기</a>
-        <p>
-            관련된 펫 : 
-            <br/>
-            {% if linked.count == 0 %}
-                <p> 등록된 신고가 없어요 ㅠㅠ </p>
-            {% else %}
-                {% for l in linked %}
-                
-                <img src=" {{ l.thumb }} " />
-                
-                {% endfor %}
-            
-            {% endif %}
-            
-        </p>
-<br />
-<br />
-    {% endfor %}
+        <tbody>
+          <tr>
+            <!-- 게시글을 넘버링 해주고 싶은데 구현해줄 수 있을까? -->
+            <td>1</td>
+            <td><img src= " {{ pet.thumb }} " width=150 height=150></td>
+            <td>{{ pet.where }}</td>
+            <td>{{pet.species }}</td>
+            <td>{{pet.date }}</td>
+            <td><div class="waves-light btn grey"><a href="{{ pet.link }}">자세히 보기</a></div></td>
+            <!-- hover 기능은 더 알아보고 넣도록 하겠음 -->
+            <td>
+              {% if linked.count == 0 %}
+                  <p> 등록된 신고가 없어요 ㅠㅠ </p>
+              {% else %}
+                  {% for l in linked %}
 
-    
-</p>
+                  <img src=" {{ l.thumb }} " />
+
+                  {% endfor %}
+
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+     {% endfor %}
+</table>
+
+<!-- Pagination 기능 넣어줄 수 있을까?? 참조 : https://blog.naver.com/kimfame/221318967452 -->
+<center>
+    <ul class="pagination">
+       <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+       <li class="active grey"><a href="#!">1</a></li>
+       <li class="waves-effect"><a href="#!">2</a></li>
+       <li class="waves-effect"><a href="#!">3</a></li>
+       <li class="waves-effect"><a href="#!">4</a></li>
+       <li class="waves-effect"><a href="#!">5</a></li>
+      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+</center>
+
 {% endblock content %}
