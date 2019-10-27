@@ -1,19 +1,8 @@
-
 {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'firstpage/css/frontpage.css' %}" />
 
-<div class="container">
-    <h2>
-        made by..
-    </h2>
-    
-    <h1>
-        team. "We dont have Hair"
-    </h1>
-    
-    <h5>
-        김태현, 안민준 in Develup
-    </h5>
-</div>
+
+<img class="center" src="{% static 'firstpage/images/we_dont_have_hair.png' %}">
 
 <script>
     setTimeout(function() { window.location.replace("/firstpage"); }, 5000);
