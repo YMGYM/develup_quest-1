@@ -1,6 +1,6 @@
 table {
-     width: 70%;
-     margin: 0 auto;
+     /* width: 70%; */
+     /* margin: 0 auto; */
    }
 
 th {
@@ -10,3 +10,15 @@ th {
 td {
      text-align: center;
    }
+
+@font-face { font-family: 'Eoe_Zno_B'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_B.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.namYG {
+    font-family: 'Eoe_Zno_B';
+}
+
+@font-face { font-family: 'Handon3gyeopsal300g'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal300g.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.hanD {
+    font-family: 'Handon3gyeopsal300g';
+}

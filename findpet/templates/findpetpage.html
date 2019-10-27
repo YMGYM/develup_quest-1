@@ -7,41 +7,39 @@
 
 <!-- img will be re-designed soon -->
 
-<div class="container">
 <h1><a href="#"><img src="{% static 'findpet/images/logo.png' %}"/></a></h1>
 
-<table>
-        <thead>
-          <div class="row"><tr>
-              <div class="col s1"><th>No</th></div>
-              <div class="col s2"><th>사진</th></div>
-              <div class="col s2"><th>발견 장소</th></div>
-              <div class="col s1"><th>종</th></div>
-              <div class="col s2"><th>신고 일시</th></div>
-              <div class="col s2"><th>자세히 보기</th></div>
-              <div class="col s2"><th>관련된 펫</th></div>
+<table >
+        <thead class="row" >
+          <tr>
+              <div class="col l1 s2"><th class="namYG">No</th></div>
+              <div class="col l2 s4"><th class="namYG">사진</th></div>
+              <div class="col l2 s4"><th class="namYG" >발견 장소</th></div>
+              <div class="col l1 s2"><th class="namYG">종</th></div>
+              <div class="col l2 s4"><th class="namYG">신고 일시</th></div>
+              <div class="col l2 s4"><th class="namYG">자세히 보기</th></div>
+              <div class="col l2 s4"><th class="namYG">관련된 펫</th></div>
           </tr>
-          </div>
+          
         </thead>
-
-    {% for pet, linked in context %}
-        <tbody id= "content">
-          <div class="row"><tr>
-            <div class="col s1"><td>{{ pet.id }}</td></div>
-            <div class="col s2"><td><img src= " {{ pet.thumb }} " width=150 height=150></td></div>
-            <div class="col s2"><td>{{ pet.where }}</td></div>
-            <div class="col s1"><td>{{pet.species }}</td></div>
-            <div class="col s2"><td>{{pet.date }}</td></div>
-            <div class="col s2"><td><div class="waves-light btn grey"><a href="{{ pet.link }}">자세히 보기</a></div></td></div>
-            <div class="col s2"><td>
+        <tbody id= "content" class="row" >
+        {% for pet, linked in context %}
+          <tr>
+            <div class="col l1 s2"><td class="hanD">{{ pet.id }}</td></div>
+            <div class="col l2 s4"><td class="hanD"><img src= " {{ pet.thumb }} " width=150 height=150></td></div>
+            <div class="col l2 s4"><td class="hanD">{{ pet.where }}</td></div>
+            <div class="col l2 s4"><td class="hanD">{{pet.species }}</td></div>
+            <div class="col l1 s2"><td class="hanD">{{pet.date }}</td></div>
+            <div class="col l2 s4"><td class="hanD" ><div class="waves-light btn grey"><a href="{{ pet.link }}" class=" red-text text-lighten-4">More</a></div></td></div>
+            <div class="col l2 s4"><td class="hanD">
               {% if linked.count == 0 %}
                   <p> </p>
               {% else %}
-                <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" class="hover"><img src="{% static 'findpet/images/hoverme.png' %}"/></div>
+                <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" class="hover"><a class="waves-effect waves-light btn">보기</a></div>
               {% endif %}
             </td></div>
           </tr>
-          </div>
+          
         </tbody>
      {% endfor %}
 </table>
@@ -77,5 +75,5 @@
   </center>
   <div class="col s2"></div>
   </div>
-</div>
+
 {% endblock content %}
