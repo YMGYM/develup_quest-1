@@ -110,8 +110,10 @@ def searcher(word):
     
     for col_key in word:
         for keyword in col_key:
-            slist = AngelFind.objects.filter(Q(where__icontains=keyword)|Q(species__icontains=keyword)).distinct()
-
+            # slist = AngelFind.objects.filter(Q(where__icontains=keyword)|Q(species__icontains=keyword)).distinct()
+            # 같은 종의 동물로만 검색
+            slist = AngelFind.objects.filter(Q(species__icontains=keyword)).distinct()
+    
             searched_list.append(slist)
             
     return searched_list

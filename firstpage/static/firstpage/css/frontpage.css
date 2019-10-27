@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: white;
     font-family: 'arial';
   }
@@ -48,3 +48,26 @@ body {
     text-decoration: none;
     float: left;
   }
+ */
+
+ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+.smallimage {
+    height: 50%;
+    width: 50%;
+}
+
+
+@font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.cookie {
+    font-family: 'CookieRunOTF-Bold';
+}

@@ -7,7 +7,7 @@
 
 <!-- img will be re-designed soon -->
 
-<h1><a href="#"><img src="{% static 'findpet/images/logo.png' %}"/></a></h1>
+<h1><a href="{% url 'firstpage' %}"><img src="{% static 'findpet/images/logo.png' %}"/></a></h1>
 
 <table >
         <thead class="row" >
@@ -30,12 +30,12 @@
             <div class="col l2 s4"><td class="hanD">{{ pet.where }}</td></div>
             <div class="col l2 s4"><td class="hanD">{{pet.species }}</td></div>
             <div class="col l1 s2"><td class="hanD">{{pet.date }}</td></div>
-            <div class="col l2 s4"><td class="hanD" ><div class="waves-light btn grey"><a href="{{ pet.link }}" class=" red-text text-lighten-4">More</a></div></td></div>
+            <div class="col l2 s4"><td class="hanD" ><div class="waves-light btn grey"><a href="{{ pet.link }}" class=" orange-text text-lighten-4">More</a></div></td></div>
             <div class="col l2 s4"><td class="hanD">
               {% if linked.count == 0 %}
                   <p> </p>
               {% else %}
-                <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" class="hover"><a class="waves-effect waves-light btn">보기</a></div>
+                <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" data-link="{{linked.link}}" class="hover"><a class="waves-effect waves-light btn  orange lighten-1">보기</a></div>
               {% endif %}
             </td></div>
           </tr>

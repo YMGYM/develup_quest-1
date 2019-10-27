@@ -1,12 +1,11 @@
 $(document).ready(function() {
   $(".hover").each(function () {
-    // html로부터 이미지 source를 받아 옵니다.
-    var link = $(this).data("thumb");
+    var thumb = $(this).data("thumb");
     var where = $(this).data('where');
-    console.log(link)
+    var link = $(this).data("link");
     $(this).qtip({
       content: {
-        text: '<img src= "' + link + '" /><br /><p>' + where + '</p>'
+        text: '<a href="'+ link + '"><img src= "' + thumb + '" /><br /><p class="black-text">' + where + '</p></a>'
       },
       hide: {
         fixed: true,

@@ -6,11 +6,27 @@
 
 <!-- img will be re-designed soon -->
 
-<h1><a href="#"><img src="{% static 'firstpage/images/logo.png' %}"/></a></h1>
+<!-- <h1><a href="#"><img src="{% static 'firstpage/images/logo.png' %}"/></a></h1>-->
 
-<div class="wrapper">
-  <div class="box1"><a href="{% url 'lostpet:list' %}">lostpet</a></div>
-  <div class="box2"><a href="{% url 'findpet:list' %}">findpet</a></div>
+<div class="row">
+    <h1>
+        우리 멍이 너희 냥이
+    </h1>
 </div>
 
+<div class="row">
+    <div class="col s6 center tooltipped" data-position="bottom" data-tooltip="다른 사람이 펫을 잃어버려 신고한 정보를 모두 보여줍니다."><a href="{% url 'lostpet:list' %}">
+        <img class="smallimage " src="{% static 'firstpage/images/wanted.png' %}"><h5 class="center grey-text text-darken-4 cookie">실종신고 정보</h5></a>      
+    </div>
+    <div class="col s6 center tooltipped" data-position="bottom" data-tooltip="다른 사람이 보호중인 주인 잃은 펫의 정보를 모두 보여줍니다." ><a href="{% url 'findpet:list' %}">
+        <img class="smallimage" src="{% static 'firstpage/images/missing.png' %}"><h5 class="center grey-text text-darken-4 cookie">보호신고 정보</h5></a>      
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems);
+  });
+</script>
 {% endblock content %}
