@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#{{ pet.id }}").each(function () {
+  $(".hover").each(function () {
     $(this).qtip({
       content: {
         text: '<img src=" {{ l.thumb }} " />'

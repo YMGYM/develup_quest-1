@@ -36,7 +36,7 @@
               {% if linked.count == 0 %}
                   <p> </p>
               {% else %}
-                  <div id="{{ pet.id }}"><img src="hoverme.png"/></div>
+                  <div id="{{ pet.id }}" class="hover"><img src="{% static 'findpet/images/hoverme.png' %}"/></div>
                   {% for l in linked %}
 
                   {% endfor %}
