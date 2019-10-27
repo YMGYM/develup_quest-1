@@ -7,45 +7,51 @@
 
 <!-- img will be re-designed soon -->
 
+<div class="container">
 <h1><a href="#"><img src="{% static 'findpet/images/logo.png' %}"/></a></h1>
 
 <table>
         <thead>
-          <tr>
-              <th>No</th>
-              <th>사진</th>
-              <th>발견 장소</th>
-              <th>종</th>
-              <th>신고 일시</th>
-              <th>자세히 보기</th>
-              <th>관련된 펫</th>
+          <div class="row"><tr>
+              <div class="col s1"><th>No</th></div>
+              <div class="col s2"><th>사진</th></div>
+              <div class="col s2"><th>발견 장소</th></div>
+              <div class="col s1"><th>종</th></div>
+              <div class="col s2"><th>신고 일시</th></div>
+              <div class="col s2"><th>자세히 보기</th></div>
+              <div class="col s2"><th>관련된 펫</th></div>
           </tr>
+          </div>
         </thead>
 
     {% for pet, linked in context %}
         <tbody id= "content">
-          <tr>
-            <td>{{ pet.id }}</td>
-            <td><img src= " {{ pet.thumb }} " width=150 height=150></td>
-            <td>{{ pet.where }}</td>
-            <td>{{pet.species }}</td>
-            <td>{{pet.date }}</td>
-            <td><div class="waves-light btn grey"><a href="{{ pet.link }}">자세히 보기</a></div></td>
-            <!-- 어렵다 정말 :( -->
-            <td>
+          <div class="row"><tr>
+            <div class="col s1"><td>{{ pet.id }}</td></div>
+            <div class="col s2"><td><img src= " {{ pet.thumb }} " width=150 height=150></td></div>
+            <div class="col s2"><td>{{ pet.where }}</td></div>
+            <div class="col s1"><td>{{pet.species }}</td></div>
+            <div class="col s2"><td>{{pet.date }}</td></div>
+            <div class="col s2"><td><div class="waves-light btn grey"><a href="{{ pet.link }}">자세히 보기</a></div></td></div>
+            <div class="col s2"><td>
               {% if linked.count == 0 %}
                   <p> </p>
-              {% else %}  
+              {% else %}
                 <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" class="hover"><img src="{% static 'findpet/images/hoverme.png' %}"/></div>
               {% endif %}
-            </td>
+            </td></div>
           </tr>
+          </div>
         </tbody>
      {% endfor %}
 </table>
 
 <!-- 페이지가 없는 경우 disabled된 페이지 커서를 띄울 수 있게 주석처리 해 놓았음. 필요하면 해제 후 사용 -->
-<center>
+
+ <div class="row">
+ <div class="col s2"></div>
+ <center>
+ <div class="col s8">
     <ul class="pagination">
     {% if board.has_previous %}
         <li class="waves-effect"><a href="?page={{ board.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
@@ -67,7 +73,9 @@
         <!-- <li class="disabled"><i class="material-icons">chevron_right</i></li> -->
     {% endif %}
     </ul>
-</center>
-
-
+  </div>
+  </center>
+  <div class="col s2"></div>
+  </div>
+</div>
 {% endblock content %}
