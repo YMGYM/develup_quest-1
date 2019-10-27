@@ -5,6 +5,9 @@ import datetime
 from django.utils import timezone
 from django.db.models import Q
 from findpet.models import AngelFind
+from django.core.paginator import Paginator
+
+
 def crawler(dog_url, cat_url):
     
     # 강아지 실종정보
@@ -86,9 +89,17 @@ def list(request):
         linked_pet.append(uni_qs)
         word_list = []
     
-    
+     # template에서 쓰기 위한 랜덤픽
+    pick_list = []
+    for p in linked_pet:
+        try:
+            # 좋은 코드가 아니라는데 좀 걱정이다.
+            pick_list.append(p.order_by('?')[0])
+        except IndexError:
+            pick_list.append(AngelLost.objects.none())
+           
     # ---------------- 검색된 펫과, 페이지네이션 된 배열을 연결합니다.
-    zipped_list = zip(board, linked_pet)
+    zipped_list = zip(board, pick_list)
     
     
     return render(request, 'findpetpage.html',{'context':zipped_list, 'board':board, 'page_range': page_range })

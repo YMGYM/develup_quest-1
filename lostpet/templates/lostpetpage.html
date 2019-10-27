@@ -3,17 +3,18 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'findpet/css/findpet.css' %}" />
+<script src="{% static 'script/script.js' %}"></script>
 
 <!-- img will be re-designed soon -->
 
-<h1><a href="#"><img src="{% static 'findpet/images/logo.png' %}"/></a></h1>
+<h1><a href="#"><img src="{% static 'images/logo.png' %}"/></a></h1>
 
 <table>
         <thead>
           <tr>
               <th>No</th>
               <th>사진</th>
-              <th>실종 장소</th>
+              <th>발견 장소</th>
               <th>종</th>
               <th>신고 일시</th>
               <th>자세히 보기</th>
@@ -22,26 +23,20 @@
         </thead>
 
     {% for pet, linked in context %}
-        <tbody>
+        <tbody id= "content">
           <tr>
-            
             <td>{{ pet.id }}</td>
             <td><img src= " {{ pet.thumb }} " width=150 height=150></td>
             <td>{{ pet.where }}</td>
             <td>{{pet.species }}</td>
             <td>{{pet.date }}</td>
             <td><div class="waves-light btn grey"><a href="{{ pet.link }}">자세히 보기</a></div></td>
-            <!-- hover 기능은 더 알아보고 넣도록 하겠음 -->
+            <!-- 어렵다 정말 :( -->
             <td>
               {% if linked.count == 0 %}
-                  <p> 등록된 신고가 없어요 ㅠㅠ </p>
-              {% else %}
-                  {% for l in linked %}
-
-                  <img src=" {{ l.thumb }} " />
-
-                  {% endfor %}
-
+                  <p> </p>
+              {% else %}  
+                <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" class="hover"><img src="{% static 'images/hoverme.png' %}"/></div>
               {% endif %}
             </td>
           </tr>
@@ -49,31 +44,30 @@
      {% endfor %}
 </table>
 
-<!-- Pagination 참조 : https://blog.naver.com/kimfame/221318967452 -->
 <!-- 페이지가 없는 경우 disabled된 페이지 커서를 띄울 수 있게 주석처리 해 놓았음. 필요하면 해제 후 사용 -->
 <center>
     <ul class="pagination">
-    {% if board.has_previous %} 
+    {% if board.has_previous %}
         <li class="waves-effect"><a href="?page={{ board.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
     {% else %}
         <!-- <li class="disabled"><i class="material-icons">chevron_left</i></li> -->
     {% endif %}
-        
+
     {% for bn in page_range %}
         {% if bn == board.number %}
             <li class="active grey"><a href="?page={{ bn }}">{{bn}}</a></li>
-        
+
         {% else %}
             <li class="waves-effect"><a href="?page={{bn}}">{{bn}}</a></li>
         {% endif %}
     {% endfor %}
-    {% if board.has_next %} 
+    {% if board.has_next %}
         <li class="waves-effect"><a href="?page={{ board.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
     {% else %}
         <!-- <li class="disabled"><i class="material-icons">chevron_right</i></li> -->
     {% endif %}
     </ul>
 </center>
-    
+
 
 {% endblock content %}

@@ -35,11 +35,8 @@
             <td>
               {% if linked.count == 0 %}
                   <p> </p>
-              {% else %}
-                  <div id="{{ pet.id }}" class="hover"><img src="{% static 'findpet/images/hoverme.png' %}"/></div>
-                  {% for l in linked %}
-
-                  {% endfor %}
+              {% else %}  
+                <div id="{{ pet.id }}" data-thumb="{{ linked.thumb }}" data-where="{{ linked.where }}" class="hover"><img src="{% static 'findpet/images/hoverme.png' %}"/></div>
               {% endif %}
             </td>
           </tr>
