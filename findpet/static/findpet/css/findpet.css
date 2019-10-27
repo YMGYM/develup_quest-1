@@ -22,3 +22,8 @@ td {
 .hanD {
     font-family: 'Handon3gyeopsal300g';
 }
+
+.smallimage {
+    height: 50%;
+    width: 50%;
+}
