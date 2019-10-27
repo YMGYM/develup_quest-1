@@ -7,14 +7,14 @@
 <!-- img will be re-designed soon -->
 
 <div class="row">
-    <a href="#" class="center"><img src="{% static 'firstpage/images/logo.png' %}"/></a>
+    <a href="#" class="center s12 "><img src="{% static 'firstpage/images/logo.png' %}"/></a>
 </div>
 
 <div class="row">
-    <div class="col s6 center tooltipped" data-position="bottom" data-tooltip="다른 사람이 펫을 잃어버려 신고한 정보를 모두 보여줍니다."><a href="{% url 'lostpet:list' %}">
+    <div class="col m6 s12 center tooltipped" data-position="bottom" data-tooltip="다른 사람이 펫을 잃어버려 신고한 정보를 모두 보여줍니다."><a href="{% url 'lostpet:list' %}">
         <img class="smallimage " src="{% static 'firstpage/images/wanted.png' %}"><h5 class="center grey-text text-darken-4 cookie">실종신고 정보</h5></a>      
     </div>
-    <div class="col s6 center tooltipped" data-position="bottom" data-tooltip="다른 사람이 보호중인 주인 잃은 펫의 정보를 모두 보여줍니다." ><a href="{% url 'findpet:list' %}">
+    <div class="col s12 m6 center tooltipped" data-position="bottom" data-tooltip="다른 사람이 보호중인 주인 잃은 펫의 정보를 모두 보여줍니다." ><a href="{% url 'findpet:list' %}">
         <img class="smallimage" src="{% static 'firstpage/images/missing.png' %}"><h5 class="center grey-text text-darken-4 cookie">보호신고 정보</h5></a>      
     </div>
 </div>
